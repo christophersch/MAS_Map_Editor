@@ -22,8 +22,6 @@ public class MapEditor extends Application {
     boolean placedGuardSpawn = false;
     boolean placedIntruderSpawn = false;
 
-    static int teleportCount = 0;
-
     ArrayList<MapObject> mapObjects = new ArrayList<>();
 
     @Override
@@ -47,7 +45,6 @@ public class MapEditor extends Application {
             }
 
             case TELEPORT -> {
-                teleportCount++;
                 mode = EditorMode.PLACE_TELEPORT_EXIT;
             }
         }
@@ -74,8 +71,6 @@ public class MapEditor extends Application {
                 placedGuardSpawn = false;
             else if (last.object_type == ObjectType.INTRUDER_SPAWN)
                 placedIntruderSpawn = false;
-            else if (last.object_type == ObjectType.TELEPORT)
-                teleportCount--;
 
             mapObjects.remove(last);
         }

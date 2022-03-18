@@ -14,19 +14,12 @@ public class MapObject {
     int teleport_exit_y = -999;
     double teleport_exit_theta = 0.0;
 
-    // Mainly used by teleports
-    String idText = "";
-
     public MapObject(ObjectType object_type, int x1, int y1, int x2, int y2) {
         this.object_type = object_type;
         this.x1 = x1;
         this.y1 = y1;
         this.x2 = x2;
         this.y2 = y2;
-
-        if (object_type == ObjectType.TELEPORT)
-            idText = MapEditor.teleportCount + "";
-
     }
 
     public Color getColor() {
@@ -35,6 +28,10 @@ public class MapObject {
             case TELEPORT -> Color.ORANGE;
             case INTRUDER_SPAWN -> Color.RED;
             case GUARD_SPAWN -> Color.BLUE;
+            case SHADED -> Color.BLACK;
+            case DOOR -> Color.BROWN;
+            case WINDOW -> Color.AQUA;
+            case TEXTURE -> Color.GREEN;
         };
     }
 
@@ -50,6 +47,10 @@ public class MapObject {
             case GUARD_SPAWN -> "spawnAreaGuards";
             case INTRUDER_SPAWN -> "spawnAreaIntruders";
             case TELEPORT -> "teleport";
+            case SHADED -> "shaded";
+            case DOOR -> "door";
+            case WINDOW -> "window";
+            case TEXTURE -> "texture";
         };
 
         s += " = " + x1 + " " + y1 + " " + x2 + " " + y2;

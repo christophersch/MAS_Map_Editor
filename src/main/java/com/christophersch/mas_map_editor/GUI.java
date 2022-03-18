@@ -261,23 +261,12 @@ public class GUI {
         }
 
         for(MapObject mobject : parent.getMapObjects()){
-            gc.setStroke(mobject.getColor());
-            if (mobject.doLines()) {
-                gc.setLineWidth(1);
-                gc.strokeLine(scale_x*mobject.x1,scale_y*mobject.y1, scale_x*mobject.x2,scale_y*mobject.y2);
-                gc.strokeLine(scale_x*mobject.x1,scale_y*mobject.y2, scale_x*mobject.x2,scale_y*mobject.y1);
-            } else {
-                gc.setLineWidth(3);
-            }
-            gc.strokeRect(mobject.x1*scale_x,mobject.y1*scale_y,(mobject.x2-mobject.x1)*scale_x,(mobject.y2-mobject.y1)*scale_y);
+            boolean drawObject = true;
 
             // Teleport exit
             if (mobject.object_type == ObjectType.TELEPORT) {
-                gc.setLineWidth(1.5);
-                gc.strokeText(mobject.idText,mobject.x1*scale_x,(mobject.y1-1)*scale_y);
-                gc.setLineWidth(1.5);
-                gc.strokeText(mobject.idText,mobject.teleport_exit_x*scale_x,(mobject.teleport_exit_y-1)*scale_y);
-
+                gc.setStroke(Color.ORANGE);
+                // Draw exit if it exists
                 if (mobject.teleport_exit_x > 0) {
                     gc.setLineWidth(2);
                     gc.strokeOval(
@@ -296,10 +285,10 @@ public class GUI {
                             mobject.teleport_exit_y * scale_y);
                 }
 
-
                 gc.setLineWidth(2);
                 gc.setLineDashes(0);
 
+                // Exit theta line
                 double dir = mobject.teleport_exit_theta;
                 double len = 5;
 
@@ -308,9 +297,25 @@ public class GUI {
 
                 gc.strokeLine(mobject.teleport_exit_x*scale_x, mobject.teleport_exit_y*scale_y,
                         dir_x*scale_x,dir_y*scale_y);
-
+            } else if (mobject.object_type == ObjectType.SHADED) {
+                gc.setGlobalAlpha(.25);
+                gc.setFill(Color.BLACK);
+                gc.fillRect(mobject.x1*scale_x,mobject.y1*scale_y,(mobject.x2-mobject.x1)*scale_x,(mobject.y2-mobject.y1)*scale_y);
+                gc.setGlobalAlpha(1);
+                drawObject = false;
             }
 
+            if (drawObject) {
+                gc.setStroke(mobject.getColor());
+                if (mobject.doLines()) {
+                    gc.setLineWidth(1);
+                    gc.strokeLine(scale_x * mobject.x1, scale_y * mobject.y1, scale_x * mobject.x2, scale_y * mobject.y2);
+                    gc.strokeLine(scale_x * mobject.x1, scale_y * mobject.y2, scale_x * mobject.x2, scale_y * mobject.y1);
+                } else {
+                    gc.setLineWidth(3);
+                }
+                gc.strokeRect(mobject.x1 * scale_x, mobject.y1 * scale_y, (mobject.x2 - mobject.x1) * scale_x, (mobject.y2 - mobject.y1) * scale_y);
+            }
         }
     }
 }

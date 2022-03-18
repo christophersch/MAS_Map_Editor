@@ -4,5 +4,9 @@ public enum ObjectType {
     WALL,
     GUARD_SPAWN,
     INTRUDER_SPAWN,
-    TELEPORT
+    TELEPORT,
+    DOOR,
+    WINDOW,
+    SHADED,
+    TEXTURE
 }
