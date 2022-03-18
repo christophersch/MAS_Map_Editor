@@ -1,0 +1,8 @@
+width = 120
+height = 80
+numGuards = 5
+wall = 38 5 83 13
+wall = 79 13 83 58
+wall = 38 58 83 65
+wall = 38 13 43 58
+teleport = 24 31 34 43 90 37 1.5083775167989393
