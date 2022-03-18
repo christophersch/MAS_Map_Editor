@@ -7,7 +7,7 @@ Simply clone the repository to your device and run the project with Gradle in yo
 
 ## Usage
 ### Editing
-Click and hold on the screen to draw a rectangle of the selected object type. The light blue reticle indicates where your cursor is in the map's discrete space.
+Click and drag the mouse to draw a rectangle of the selected object type. The light blue reticle indicates where your cursor is in the map's discrete space.
 
 Placing map objects can be undone with the "Undo" button or by using CTRL + Z (doesn't work if the map width/height/name fields are selected).
 
