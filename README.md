@@ -1,4 +1,4 @@
-#Multi-Agent Surveillance Map Editor
+# Multi-Agent Surveillance Map Editor
 
 Simple map editor developed by Group 3 for Project 2-2 at DKE, Maastricht University.
 
