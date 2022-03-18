@@ -61,6 +61,12 @@ public class GUI {
         // toolbar items
         objectTypeComboBox.getItems().setAll(ObjectType.values());
         objectTypeComboBox.setValue(ObjectType.WALL);
+        objectTypeComboBox.setOnAction( e -> {
+            if (parent.mode != EditorMode.EDIT) {
+                parent.deleteLast();
+                parent.mode = EditorMode.EDIT;
+            }
+        });
 
         deleteLastObjectButton = new Button("Undo");
         deleteLastObjectButton.setOnAction(e -> {
@@ -130,7 +136,11 @@ public class GUI {
 
         deleteLastObjectButton.getScene().getAccelerators().put(
                 new KeyCodeCombination(KeyCode.Z, KeyCombination.SHORTCUT_DOWN),
-                () -> deleteLastObjectButton.fire()
+                () -> {
+                    if (parent.mode != EditorMode.EDIT)
+                        parent.deleteLast();
+                    deleteLastObjectButton.fire();
+                }
         );
 
         primary_stage.widthProperty().addListener((obs, oldVal, newVal) ->
@@ -153,7 +163,9 @@ public class GUI {
     boolean exitedTeleporterMode = false;
 
     private void addMouseControls(Scene scene) {
+
         scene.addEventFilter(MouseEvent.MOUSE_PRESSED, e -> {
+
             if (parent.mode == EditorMode.EDIT) {
                 int[] mouse_pos_canvas = translateMouseToCanvas(e.getSceneX(), e.getSceneY());
                 new_object_x1 = mouse_pos_canvas[0];
@@ -162,14 +174,14 @@ public class GUI {
                 new_object_y2 = new_object_y1;
 
                 mouse_down = true;
-            } else if (parent.mode == EditorMode.PLACE_TELEPORT_EXIT) {
+            } else if (parent.mode == EditorMode.PLACE_TELEPORT_EXIT && mouse_y > 0) {
                 int[] mouse_pos_canvas = translateMouseToCanvas(e.getSceneX(), e.getSceneY());
 
                 parent.getLastObject().teleport_exit_x = mouse_pos_canvas[0];
                 parent.getLastObject().teleport_exit_y = mouse_pos_canvas[1];
 
                 parent.mode = EditorMode.SET_TELEPORT_EXIT_DIRECTION;
-            } else if (parent.mode == EditorMode.SET_TELEPORT_EXIT_DIRECTION) {
+            } else if (parent.mode == EditorMode.SET_TELEPORT_EXIT_DIRECTION && mouse_y > 0) {
 
                 parent.mode = EditorMode.EDIT;
 
