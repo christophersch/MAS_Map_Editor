@@ -8,8 +8,8 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class MapEditor extends Application {
-    public final static int INITIAL_WINDOW_WIDTH = 640 * 2;
-    public final static int INITIAL_WINDOW_HEIGHT = 360 * 2;
+    public final static int INITIAL_WINDOW_WIDTH = 1280;
+    public final static int INITIAL_WINDOW_HEIGHT = 720;
 
     int mapWidth = 120;
     int mapHeight = 80;
@@ -44,9 +44,8 @@ public class MapEditor extends Application {
                     placedIntruderSpawn = true;
             }
 
-            case TELEPORT -> {
-                mode = EditorMode.PLACE_TELEPORT_EXIT;
-            }
+            case TELEPORT -> mode = EditorMode.PLACE_TELEPORT_EXIT;
+
         }
 
         MapObject new_object = new MapObject(object, x1, y1, x2, y2);
