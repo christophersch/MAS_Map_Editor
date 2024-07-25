@@ -1,6 +1,6 @@
 # Multi-Agent Surveillance Map Editor
 
-Simple map editor developed by Group 3 for Project 2-2 at DKE, Maastricht University.
+Simple map editor developed by Group 3 for Project 2-2 at DACS (formerly DKE), Maastricht University.
 
 ## Running
 Simply clone the repository to your device and run the project with Gradle in your IDE.
